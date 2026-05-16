@@ -38,6 +38,14 @@ app.get('/electrician/*', (req, res) => {
 // Cyber Infra static dashboard
 const cyberDashboardPath = path.join(__dirname, '../cyber-infra/dashboard');
 app.use('/cyber/static', express.static(path.join(cyberDashboardPath, 'static')));
+
+// Babylon.js FPS Game static route
+const fpsGamePath = path.join(__dirname, 'fps-game');
+app.use('/fps/static', express.static(fpsGamePath));
+// Serve index.html for FPS base path
+app.get('/fps', (req, res) => {
+  res.sendFile(path.join(fpsGamePath, 'index.html'));
+});
 app.use('/cyber/manifest.json', (req, res) => {
   res.sendFile(path.join(cyberDashboardPath, 'manifest.json'));
 });
