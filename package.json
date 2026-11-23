@@ -1,0 +1,13 @@
+{
+  "name": "geoos-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "GeoOS web-based OS - frontend shell",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.0"
+  }
+}

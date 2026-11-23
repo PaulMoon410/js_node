@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeoOS - Front-End Operating System</title>
+  <link rel="preload" href="style.css" as="style">
+  <link rel="stylesheet" href="style.css">
+  <!-- API bridge loads first so apps can use window.geoosApi -->
+  <script type="module" src="api.js"></script>
+  <!-- Kernel bootloader loads apps lazily on demand -->
+  <script type="module" src="kernel.js"></script>
+</head>
+<body>
+  <!-- Desktop background -->
+  <div id="desktop">
+    <!-- Desktop icons will be injected here by kernel.js -->
+    <div id="desktop-icons"></div>
+
+    <!-- Taskbar -->
+    <div id="taskbar">
+      <div id="start-button">Start</div>
+      <div id="start-menu" class="hidden">
+        <div class="menu-section">
+          <div class="menu-item" data-app="terminal">Terminal</div>
+          <div class="menu-item" data-app="notepad">Notepad</div>
+          <div class="menu-divider"></div>
+          <div class="menu-item" id="shutdown-item">Shut Down</div>
+        </div>
+      </div>
+      <div id="taskbar-clock" class="taskbar-item">00:00:00</div>
+      <div id="taskbar-apps" class="taskbar-item"></div>
+    </div>
+
+    <!-- Window container -->
+    <div id="window-container"></div>
+
+    <!-- App loader overlay (shown while fetching app modules) -->
+    <div id="app-loader" class="hidden">
+      <div class="loader-spinner"></div>
+      <div id="loader-message">Loading application...</div>
+    </div>
+  </div>
+
+  <!-- App module placeholders (lazy-loaded by kernel.js) -->
+  <script type="module">
+    import { Kernel } from './kernel.js';
+    window.kernel = new Kernel();
+  </script>
+
+  <script>
+    // Wait for page to fully load, then make body visible to prevent CLS warnings
+    window.addEventListener('load', () => {
+      document.body.style.visibility = 'visible';
+    });
+  </script>
+</body>
+</html>
