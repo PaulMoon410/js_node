@@ -1,13 +1,13 @@
 {
-  "name": "geoos-frontend",
+  "name": "geoos-node-service",
   "version": "1.0.0",
-  "private": true,
-  "type": "module",
-  "description": "GeoOS web-based OS - frontend shell",
+  "description": "GeoOS Node.js utility microservice for Render",
+  "main": "js_render/index.js",
   "scripts": {
-    "test": "vitest run"
+    "start": "node js_render/index.js"
   },
-  "devDependencies": {
-    "vitest": "^2.1.0"
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
   }
 }
